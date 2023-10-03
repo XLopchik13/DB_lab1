@@ -33,5 +33,20 @@ with open('variants.txt', encoding="utf8") as f_variants:
         variant = Variant(a[0], a[1])
         print(variant.id, variant.path)
 
+root = Tk()
+root.title("Teacher program")
+root.geometry("800x400")
+people = [("Tom", 38, "tom@email.com"), ("Bob", 42, "bob@email.com"), ("Sam", 28, "sam@email.com")]
+columns = ("id", "name", "surname", "patronymic")
+tree = ttk.Treeview(columns=columns, show="headings")
+tree.pack(fill=BOTH, expand=1)
+tree.heading("id", text="id")
+tree.heading("name", text="name")
+tree.heading("surname", text="surname")
+tree.heading("patronymic", text="patronymic")
+for person in people:
+    tree.insert("", END, values=person)
+root.mainloop()
+
 f_names.close()
 f_variants.close()
