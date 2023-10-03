@@ -16,6 +16,8 @@ class Variant:
         self.path = path
 
 
+print("Добро пожаловать в систему оценивания студентов", 'Чтобы увидеть команды введите -help', sep='\n')
+
 students_list = []
 for i in range(50):
     students_list.append([])
@@ -25,7 +27,7 @@ with open('names.txt', encoding="utf8") as f_names:
     for line in f_names:
         a = line.split()
         student = Student(n, a[0], a[1], a[2])
-        #students_list[i].append(student.id, student.name, student.surname, student.patronymic)
+        # students_list[i].append(student.id, student.name, student.surname, student.patronymic)
         students_list[i].append(student.id)
         students_list[i].append(student.name)
         students_list[i].append(student.surname)
@@ -37,9 +39,7 @@ with open('variants.txt', encoding="utf8") as f_variants:
     for line in f_variants:
         a = line.split()
         variant = Variant(a[0], a[1])
-        #print(variant.id, variant.path)
 
-print(students_list)
 root = Tk()
 root.title("Teacher program")
 root.geometry("800x400")
