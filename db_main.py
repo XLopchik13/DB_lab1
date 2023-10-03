@@ -1,3 +1,7 @@
+from tkinter import *
+from tkinter import ttk
+
+
 class Student:
     def __init__(self, id, name, surname, patronymic):
         self.id = id
