@@ -76,7 +76,7 @@ tree.heading("surname", text="surname")
 tree.heading("patronymic", text="patronymic")
 for person in students_list:
     tree.insert("", END, values=person)
-root.mainloop()
+root.mainloop()'''
 
 f_names.close()
-f_variants.close()'''
+f_variants.close()
