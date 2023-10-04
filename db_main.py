@@ -16,31 +16,55 @@ class Variant:
         self.path = path
 
 
-print("Добро пожаловать в систему оценивания студентов", 'Чтобы увидеть команды введите -help', sep='\n')
+print("Добро пожаловать в систему оценивания студентов!", 'Чтобы увидеть команды введите /help', sep='\n')
+cmd = 0
+while cmd != '/e':
+    cmd = input()
+    if cmd == '/help':
+        print("new table: /nt #table_name []")
+        print("select table: /st #table_name")
+        print("print table: /pt #table_name")
+        print("add row: /add []")
+        print("delete row: /dl #row_number")
+        print("print row: /pr #row_number")
+        print("edit cell: /edc #row #column [new data]")
+        print("delete cell: /dc")
+        print("exit: /e")
+    elif cmd[0:4] == '/st ':
+        print(cmd[4::])
+    elif cmd == '/e':
+        print("o kurwa")
+    else:
+        print("wrong command")
+
 
 students_list = []
 for i in range(50):
     students_list.append([])
-n = 1
-i = 0
+variants_list = []
+for i in range(10):
+    variants_list.append([])
+
 with open('names.txt', encoding="utf8") as f_names:
+    n = 1
+    i = 0
     for line in f_names:
         a = line.split()
-        student = Student(n, a[0], a[1], a[2])
-        # students_list[i].append(student.id, student.name, student.surname, student.patronymic)
-        students_list[i].append(student.id)
-        students_list[i].append(student.name)
-        students_list[i].append(student.surname)
-        students_list[i].append(student.patronymic)
+        # student = Student(n, a[0], a[1], a[2])
+        # students_list[i] = [student.id, student.name, student.surname, student.patronymic]
+        students_list[i] = [n, a[0], a[1], a[2]]
         n += 1
         i += 1
 
 with open('variants.txt', encoding="utf8") as f_variants:
+    i = 0
     for line in f_variants:
         a = line.split()
-        variant = Variant(a[0], a[1])
+        # variant = Variant(a[0], a[1])
+        variants_list[i] = [a[0], a[1]]
+        i += 1
 
-root = Tk()
+'''root = Tk()
 root.title("Teacher program")
 root.geometry("800x400")
 columns = ("id", "name", "surname", "patronymic")
@@ -55,4 +79,4 @@ for person in students_list:
 root.mainloop()
 
 f_names.close()
-f_variants.close()
+f_variants.close()'''
