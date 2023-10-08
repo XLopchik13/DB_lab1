@@ -1,20 +1,12 @@
 from tkinter import *
 from tkinter import ttk
+from functions import *
 
-
-class Student:
-    def __init__(self, id, name, surname, patronymic):
-        self.id = id
-        self.name = name
-        self.surname = surname
-        self.patronymic = patronymic
-
-
-class Variant:
-    def __init__(self, id, path):
-        self.id = id
-        self.path = path
-
+titles = []
+tables_list = []
+generated_table = {}
+tables_names = []
+cur_table = ''
 
 print("Добро пожаловать в систему оценивания студентов!", 'Чтобы увидеть команды, введите /help', sep='\n')
 cmd = 0
@@ -24,48 +16,56 @@ while cmd != '/e':
         print("new table: /nt #table_name []")
         print("select table: /st #table_name")
         print("print table: /pt #table_name")
-        print("add row: /add []")
+        print("add row: /add #surname_name_midname")
         print("delete row: /dl #row_number")
         print("print row: /pr #row_number")
-        print("edit cell: /edc #row #column [new data]")
-        print("delete cell: /dc")
+        print("edit cell: /edc #row #column #new_data")
+        print("clear cell: /dc #row #column")
         print("exit: /e")
+    elif cmd[0] == '/nt':
+        if len(cmd) != 2:
+            print("wrong command")
+        else:
+            new_table(titles, tables_list, cmd[1])
     elif cmd[0] == '/st':
         if len(cmd) != 2:
             print("wrong command")
         else:
-            print(cmd[1])
+            pass
+    elif cmd[0] == '/pt':
+        if len(cmd) != 2:
+            print("wrong command")
+        else:
+            pass
+    elif cmd[0] == '/add':
+        pass
+    elif cmd[0] == '/dl':
+        if len(cmd) != 2:
+            print("wrong command")
+        else:
+            pass
+    elif cmd[0] == 'pr':
+        if len(cmd) != 2:
+            print("wrong command")
+        else:
+            pass
+    elif cmd[0] == 'edc':
+        if len(cmd) != 4:
+            print("wrong command")
+        else:
+            pass
+    elif cmd[0] == 'dc':
+        if len(cmd) != 3:
+            print("wrong command")
+        else:
+            pass
     elif cmd == '/e':
         print("o kurwa")
     else:
         print("wrong command")
 
 
-students_list = []
-for i in range(50):
-    students_list.append([])
-variants_list = []
-for i in range(10):
-    variants_list.append([])
 
-with open('names.txt', encoding="utf8") as f_names:
-    n = 1
-    i = 0
-    for line in f_names:
-        a = line.split()
-        # student = Student(n, a[0], a[1], a[2])
-        # students_list[i] = [student.id, student.name, student.surname, student.patronymic]
-        students_list[i] = [n, a[0], a[1], a[2]]
-        n += 1
-        i += 1
-
-with open('variants.txt', encoding="utf8") as f_variants:
-    i = 0
-    for line in f_variants:
-        a = line.split()
-        # variant = Variant(a[0], a[1])
-        variants_list[i] = [a[0], a[1]]
-        i += 1
 
 '''root = Tk()
 root.title("Teacher program")
@@ -80,6 +80,3 @@ tree.heading("patronymic", text="patronymic")
 for person in students_list:
     tree.insert("", END, values=person)
 root.mainloop()'''
-
-f_names.close()
-f_variants.close()
