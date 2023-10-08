@@ -16,10 +16,10 @@ class Variant:
         self.path = path
 
 
-print("Добро пожаловать в систему оценивания студентов!", 'Чтобы увидеть команды введите /help', sep='\n')
+print("Добро пожаловать в систему оценивания студентов!", 'Чтобы увидеть команды, введите /help', sep='\n')
 cmd = 0
 while cmd != '/e':
-    cmd = input()
+    cmd = input().split()
     if cmd == '/help':
         print("new table: /nt #table_name []")
         print("select table: /st #table_name")
@@ -30,8 +30,11 @@ while cmd != '/e':
         print("edit cell: /edc #row #column [new data]")
         print("delete cell: /dc")
         print("exit: /e")
-    elif cmd[0:4] == '/st ':
-        print(cmd[4::])
+    elif cmd[0] == '/st':
+        if len(cmd) != 2:
+            print("wrong command")
+        else:
+            print(cmd[1])
     elif cmd == '/e':
         print("o kurwa")
     else:
