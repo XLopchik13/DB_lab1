@@ -17,10 +17,10 @@ while cmd != '/e':
         print("select table: /st #table_name")
         print("add row: /add #surname-name-midname")
         print("print table: /pt #table_name")
-        print("delete row: /dl #row_number")
-        print("print row: /pr #row_number")
+        print("delete line: /dl #line_id")
+        print("print line: /pl #line_id")
         print("edit cell: /edc #row #column #new_data")
-        print("clear cell: /dc #row #column")
+        print("clear cell: /dcell #row #column")
         print("exit: /e")
     elif cmd[0] == '/nt':
         new_table(titles, table_list, table_names, cmd)
@@ -43,7 +43,7 @@ while cmd != '/e':
         if len(cmd) != 2:
             print("wrong command")
         else:
-            print_table()
+            print_table(cur_table, table_names, titles, table_list)
 
     elif cmd[0] == '/dl':
         if len(cmd) != 2:
