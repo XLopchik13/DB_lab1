@@ -17,6 +17,7 @@ while cmd != '/e':
         print("select table: /st #table_name")
         print("add row: /add #surname-name-midname")
         print("print table: /pt #table_name")
+        print("edit line: /el #line_id #surname-name-midname")
         print("delete line: /dl #line_id")
         print("print line: /pl #line_id")
         print("edit cell: /edc #row #column #new_data")
@@ -32,7 +33,6 @@ while cmd != '/e':
         else:
             print("wrong command")
 
-
     elif cmd[0] == '/add':
         if cur_table != '':
             add_row(table_names, table_list, cur_table, cmd)
@@ -40,16 +40,13 @@ while cmd != '/e':
             print("table not selected")
 
     elif cmd[0] == '/pt':
-        if len(cmd) != 2:
-            print("wrong command")
-        else:
-            print_table(cur_table, table_names, titles, table_list)
+        print_table(cmd, table_names, titles, table_list)
+
+    elif cmd[0] == '/el':
+        edit_line(cmd, table_names, cur_table, table_list)
 
     elif cmd[0] == '/dl':
-        if len(cmd) != 2:
-            print("wrong command")
-        else:
-            pass
+        delete_line(cmd, table_names, cur_table, table_list)
 
     elif cmd[0] == 'pr':
         if len(cmd) != 2:
