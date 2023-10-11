@@ -14,6 +14,7 @@ while True:
     cmd = input().split()
     if len(cmd) == 0:
         continue
+
     elif cmd[0] == '/help':
         print("new table: /nt #table_name #surname-name-midname")
         print("select table: /st #table_name")
@@ -23,6 +24,7 @@ while True:
         print("delete line: /dl #line_id")
         print("print line: /pl #line_id")
         print("exit: /e")
+
     elif cmd[0] == '/nt':
         cur_table = new_table(titles, table_list, table_names, cmd)
 
@@ -48,23 +50,8 @@ while True:
     elif cmd[0] == '/dl':
         delete_line(cmd, table_names, cur_table, table_list)
 
-    elif cmd[0] == 'pr':
-        if len(cmd) != 2:
-            print("wrong command")
-        else:
-            pass
-
-    elif cmd[0] == 'edc':
-        if len(cmd) != 4:
-            print("wrong command")
-        else:
-            pass
-
-    elif cmd[0] == 'dc':
-        if len(cmd) != 3:
-            print("wrong command")
-        else:
-            pass
+    elif cmd[0] == '/pl':
+        print_line(cmd, table_names, cur_table, table_list, titles)
 
     elif cmd[0] == '/e' and len(cmd) == 1:
         print("o kurwa")

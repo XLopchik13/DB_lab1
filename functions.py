@@ -36,8 +36,8 @@ def print_table(cmd, table_names, titles, table_list):
 
 
 def edit_line(cmd, table_names, cur_table, table_list):
-    if len(cmd) < 2:
-        print("selected non-existent line")
+    if len(cmd) != 2:
+        print("incorrect input")
         return
     ind = table_names.index(cur_table)
     tbl = sorted(table_list[ind].items(), key=lambda item: item[0])
@@ -49,8 +49,8 @@ def edit_line(cmd, table_names, cur_table, table_list):
 
 
 def delete_line(cmd, table_names, cur_table, table_list):
-    if len(cmd) < 2:
-        print("selected non-existent line")
+    if len(cmd) != 2:
+        print("incorrect input")
         return
     ind1 = table_names.index(cur_table)
     ind2 = int(cmd[1])
@@ -60,3 +60,18 @@ def delete_line(cmd, table_names, cur_table, table_list):
     else:
         print("selected non-existent line")
 
+
+def print_line(cmd, table_names, cur_table, table_list, titles):
+    if len(cmd) != 2:
+        print("incorrect input")
+        return
+
+    ind1 = table_names.index(cur_table)
+    ind2 = int(cmd[1])
+    end = len(titles[ind1])
+    tbl = sorted(table_list[ind1].items(), key=lambda item: item[0])
+
+    if ind2 in table_list[ind1]:
+        print(ind2, " ".join(tbl[ind2-1][1][:end]))
+    else:
+        print("selected non-existent line")
