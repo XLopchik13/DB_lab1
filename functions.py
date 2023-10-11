@@ -22,10 +22,9 @@ def print_table(cmd, table_names, titles, table_list):
         return
     ind = table_names.index(selected)
     end = len(titles[ind])
-    print("table:", selected)
-
-    print("id", " ".join(titles[ind]))
     tbl = sorted(table_list[ind].items(), key=lambda item: item[0])
+    print("table:", selected)
+    print("id", " ".join(titles[ind]))
     for i in range(len(tbl)):
         print(tbl[i][0], " ".join(tbl[i][1][:end]))
 
@@ -53,11 +52,11 @@ def delete_line(cmd, table_names, cur_table, table_list):
     if len(cmd) < 2:
         print("selected non-existent line")
         return
-    ind = table_names.index(cur_table)
-    tbl = sorted(table_list[ind].items(), key=lambda item: item[0])
-    for i in range(len(tbl)):
-        if cmd[1] == str(tbl[i][0]):
-            deleted = table_list[ind][int(cmd[1])].pop()
-            print(deleted, "- deleted")
-            return
-    print("selected non-existent line")
+    ind1 = table_names.index(cur_table)
+    ind2 = int(cmd[1])
+    if ind2 in table_list[ind1]:
+        del table_list[ind1][ind2]
+        print("line with id:", cmd[1], "deleted")
+    else:
+        print("selected non-existent line")
+
