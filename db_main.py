@@ -10,9 +10,11 @@ cur_table = ''
 
 print("Добро пожаловать в систему оценивания студентов!", 'Чтобы увидеть команды, введите /help', sep='\n')
 cmd = 0
-while cmd != '/e':
+while True:
     cmd = input().split()
-    if cmd[0] == '/help':
+    if len(cmd) == 0:
+        continue
+    elif cmd[0] == '/help':
         print("new table: /nt #table_name #surname-name-midname")
         print("select table: /st #table_name")
         print("add row: /add #surname-name-midname")
@@ -20,16 +22,14 @@ while cmd != '/e':
         print("edit line: /el #line_id #surname-name-midname")
         print("delete line: /dl #line_id")
         print("print line: /pl #line_id")
-        print("edit cell: /edc #row #column #new_data")
-        print("clear cell: /dcell #row #column")
         print("exit: /e")
     elif cmd[0] == '/nt':
-        new_table(titles, table_list, table_names, cmd)
+        cur_table = new_table(titles, table_list, table_names, cmd)
 
     elif cmd[0] == '/st':
         if len(cmd) == 2 and cmd[1] in table_names:
             cur_table = cmd[1]
-            print('selected "', cur_table, '"', sep='')
+            print('selected table "', cur_table, '"', sep='')
         else:
             print("wrong command")
 
@@ -66,7 +66,7 @@ while cmd != '/e':
         else:
             pass
 
-    elif cmd[0] == '/e':
+    elif cmd[0] == '/e' and len(cmd) == 1:
         print("o kurwa")
         break
 
