@@ -23,6 +23,7 @@ while True:
         print("edit line: /el #line_id #surname-name-midname")
         print("delete line: /dl #line_id")
         print("print line: /pl #line_id")
+        print("gen table: /gen #students_table #variants_table")
         print("exit: /e")
 
     elif cmd[0] == '/nt':
@@ -53,8 +54,11 @@ while True:
     elif cmd[0] == '/pl':
         print_line(cmd, table_names, cur_table, table_list, titles)
 
+    elif cmd[0] == '/gen':
+        gen_table(cmd, table_names, table_list, generated_table)
+
     elif cmd[0] == '/e' and len(cmd) == 1:
-        print("o kurwa")
+        print("exit")
         break
 
     else:

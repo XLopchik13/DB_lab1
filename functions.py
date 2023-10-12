@@ -75,3 +75,18 @@ def print_line(cmd, table_names, cur_table, table_list, titles):
         print(ind2, " ".join(tbl[ind2-1][1][:end]))
     else:
         print("selected non-existent line")
+
+
+def gen_table(cmd, table_names, table_list, generated_table):
+    if len(cmd) != 3:
+        print("incorrect input")
+        return
+
+    ind_stud = table_names.index(cmd[1])
+    ind_var = table_names.index(cmd[2])
+    t_len = len(table_list[ind_stud])
+    tbl = sorted(table_list[ind_stud].items(), key=lambda item: item[0])
+    where = tbl[ind_stud][0]
+    for i in range(t_len):
+        generated_table[where] = table_list[ind_var][i]
+    print(generated_table)
