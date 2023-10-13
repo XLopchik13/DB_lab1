@@ -66,8 +66,6 @@ while True:
         print("wrong command")
 
 
-
-
 '''root = Tk()
 root.title("Teacher program")
 root.geometry("800x400")

@@ -115,3 +115,4 @@ def gen_table(cmd, table_names, table_list, generated_table):
     print("--------------------------")
     for key, value in generated_table.items():
         print(" ".join(table_list[ind_stud][key]), table_list[ind_var][value][0], "no mark", sep=' | ')
+
