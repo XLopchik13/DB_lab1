@@ -3,13 +3,13 @@ from tkinter import ttk
 from functions import *
 
 
-titles = []  # названия столбцов
-table_list = []  # список таблиц
+titles = []
+table_list = []
 generated_table = {}
-table_names = []  # названия таблиц
+table_names = []
 cur_table = ''
 
-print("Добро пожаловать в систему оценивания студентов!", 'Чтобы увидеть команды, введите /help', sep='\n')
+print("STUDENT ASSESSMENT SYSTEM", 'To see the commands, enter /help', sep='\n')
 cmd = 0
 while True:
     cmd = input().split()
@@ -59,23 +59,8 @@ while True:
         gen_table(cmd, table_names, table_list, generated_table)
 
     elif cmd[0] == '/e' and len(cmd) == 1:
-        print("exit")
+        print("-----EXIT-----")
         break
 
     else:
         print("wrong command")
-
-
-'''root = Tk()
-root.title("Teacher program")
-root.geometry("800x400")
-columns = ("id", "name", "surname", "patronymic")
-tree = ttk.Treeview(columns=columns, show="headings")
-tree.pack(fill=BOTH, expand=1)
-tree.heading("id", text="id")
-tree.heading("name", text="name")
-tree.heading("surname", text="surname")
-tree.heading("patronymic", text="patronymic")
-for person in students_list:
-    tree.insert("", END, values=person)
-root.mainloop()'''
