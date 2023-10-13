@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import ttk
 from functions import *
 
+
 titles = []  # названия столбцов
 table_list = []  # список таблиц
 generated_table = {}
@@ -23,7 +24,7 @@ while True:
         print("edit line: /el #line_id #surname-name-midname")
         print("delete line: /dl #line_id")
         print("print line: /pl #line_id")
-        print("gen table: /gen #students_table #variants_table")
+        print("generate table: /gen #students_table #variants_table")
         print("exit: /e")
 
     elif cmd[0] == '/nt':

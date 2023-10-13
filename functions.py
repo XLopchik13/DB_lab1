@@ -1,3 +1,6 @@
+import random
+
+
 def new_table(titles, table_list, table_names, cmd):
     if cmd[1] in table_names:
         print("table with the same name already exists")
@@ -81,13 +84,34 @@ def gen_table(cmd, table_names, table_list, generated_table):
     if len(cmd) != 3:
         print("incorrect input")
         return
+    if cmd[1] not in table_names or cmd[2] not in table_names:
+        print("incorrect tables selected")
+        return
 
     ind_stud = table_names.index(cmd[1])
     ind_var = table_names.index(cmd[2])
     t_len = len(table_list[ind_stud])
     tbl = sorted(table_list[ind_stud].items(), key=lambda item: item[0])
-    where = tbl[ind_stud][0]
-    print(where)
-    for i in range(t_len):
-        print(generated_table, table_list)
 
+    r_variants = list(table_list[ind_var].keys())
+    random.shuffle(r_variants)
+
+    j = 0
+    for i in range(t_len):
+        if j < len(r_variants):
+            generated_table[int(tbl[i][0])] = r_variants[j]
+            j += 1
+        else:
+            j = 0
+            generated_table[int(tbl[i][0])] = r_variants[j]
+
+    print("\ntesting table")
+    print("stud_id | var_id")
+    print("----------------")
+    for key, value in generated_table.items():
+        print("  ", key, "   ", value)
+
+    print("\nfull_name | variant | mark")
+    print("--------------------------")
+    for key, value in generated_table.items():
+        print(" ".join(table_list[ind_stud][key]), table_list[ind_var][value][0], "no mark", sep=' | ')
