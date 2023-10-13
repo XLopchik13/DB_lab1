@@ -87,6 +87,7 @@ def gen_table(cmd, table_names, table_list, generated_table):
     t_len = len(table_list[ind_stud])
     tbl = sorted(table_list[ind_stud].items(), key=lambda item: item[0])
     where = tbl[ind_stud][0]
+    print(where)
     for i in range(t_len):
-        generated_table[where] = table_list[ind_var][i]
-    print(generated_table)
+        print(generated_table, table_list)
+
