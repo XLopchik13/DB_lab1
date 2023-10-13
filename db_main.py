@@ -25,6 +25,7 @@ while True:
         print("delete line: /dl #line_id")
         print("print line: /pl #line_id")
         print("generate table: /gen #students_table #variants_table")
+        print("add rows from file: /aff #filename")
         print("exit: /e")
 
     elif cmd[0] == '/nt':
@@ -57,6 +58,9 @@ while True:
 
     elif cmd[0] == '/gen':
         gen_table(cmd, table_names, table_list, generated_table)
+
+    elif cmd[0] == '/aff':
+        add_from_file(table_names, table_list, cur_table, cmd)
 
     elif cmd[0] == '/e' and len(cmd) == 1:
         print("-----EXIT-----")

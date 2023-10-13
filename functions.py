@@ -15,7 +15,11 @@ def new_table(titles, table_list, table_names, cmd):
 
 def add_row(table_names, table_list, cur_table, cmd):
     ind = table_names.index(cur_table)
-    table_list[ind][len(table_list[ind])+1] = cmd[1::]
+    for value in table_list[ind].items():
+        if cmd[1::] == value[1]:
+            print("line already exists")
+            return
+    table_list[ind][len(table_list[ind]) + 1] = cmd[1::]
 
 
 def print_table(cmd, table_names, titles, table_list):
@@ -39,13 +43,17 @@ def print_table(cmd, table_names, titles, table_list):
 
 
 def edit_line(cmd, table_names, cur_table, table_list):
-    if len(cmd) != 2:
+    if len(cmd) < 2:
         print("incorrect input")
         return
     ind = table_names.index(cur_table)
     tbl = sorted(table_list[ind].items(), key=lambda item: item[0])
     for i in range(len(tbl)):
         if cmd[1] == str(tbl[i][0]):
+            for value in table_list[ind].items():
+                if cmd[2:] == value[1]:
+                    print("line already exists")
+                    return
             table_list[ind][int(cmd[1])] = cmd[2:]
             return
     print("selected non-existent line")
@@ -75,7 +83,7 @@ def print_line(cmd, table_names, cur_table, table_list, titles):
     tbl = sorted(table_list[ind1].items(), key=lambda item: item[0])
 
     if ind2 in table_list[ind1]:
-        print(ind2, " ".join(tbl[ind2-1][1][:end]))
+        print(ind2, " ".join(tbl[ind2 - 1][1][:end]))
     else:
         print("selected non-existent line")
 
@@ -115,4 +123,16 @@ def gen_table(cmd, table_names, table_list, generated_table):
     print("--------------------------")
     for key, value in generated_table.items():
         print(" ".join(table_list[ind_stud][key]), table_list[ind_var][value][0], "no mark", sep=' | ')
+
+
+def add_from_file(table_names, table_list, cur_table, cmd):
+    filename = cmd[1]
+    ind = table_names.index(cur_table)
+    n = 1
+    with open(filename, encoding="utf8") as f:
+        for line in f:
+            a = line.split()
+            table_list[ind][n] = a
+            n += 1
+    f.close()
 
