@@ -6,6 +6,7 @@ from functions import *
 titles = []
 table_list = []
 generated_table = {}
+pair = [[]]
 table_names = []
 cur_table = ''
 
@@ -26,6 +27,7 @@ while True:
         print("print line: /pl #line_id")
         print("generate table: /gen #students_table #variants_table")
         print("add rows from file: /aff #filename")
+        print("print gen table: /pg")
         print("exit: /e")
 
     elif cmd[0] == '/nt':
@@ -40,7 +42,7 @@ while True:
 
     elif cmd[0] == '/add':
         if cur_table != '':
-            add_row(table_names, table_list, cur_table, cmd)
+            add_row(table_names, table_list, cur_table, cmd, pair)
         else:
             print("table not selected")
 
@@ -51,16 +53,19 @@ while True:
         edit_line(cmd, table_names, cur_table, table_list)
 
     elif cmd[0] == '/dl':
-        delete_line(cmd, table_names, cur_table, table_list)
+        delete_line(cmd, table_names, cur_table, table_list, pair)
 
     elif cmd[0] == '/pl':
         print_line(cmd, table_names, cur_table, table_list, titles)
 
     elif cmd[0] == '/gen':
-        gen_table(cmd, table_names, table_list, generated_table)
+        gen_table(cmd, table_names, table_list, generated_table, pair)
 
     elif cmd[0] == '/aff':
         add_from_file(table_names, table_list, cur_table, cmd)
+
+    elif cmd[0] == '/pg':
+        print_gen(generated_table, table_list, pair)
 
     elif cmd[0] == '/e' and len(cmd) == 1:
         print("-----EXIT-----")

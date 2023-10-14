@@ -13,12 +13,18 @@ def new_table(titles, table_list, table_names, cmd):
     return cur_table
 
 
-def add_row(table_names, table_list, cur_table, cmd):
+def add_row(table_names, table_list, cur_table, cmd, pair):
     ind = table_names.index(cur_table)
     for value in table_list[ind].items():
         if cmd[1::] == value[1]:
             print("line already exists")
             return
+    if len(pair) > 1:
+        table_list[ind][len(table_list[ind]) + 1] = cmd[1::]
+        r_variants = list(table_list[1].keys())
+        random.shuffle(r_variants)
+        pair[1][len(table_list[ind])] = r_variants[0]
+        return
     table_list[ind][len(table_list[ind]) + 1] = cmd[1::]
 
 
@@ -59,12 +65,14 @@ def edit_line(cmd, table_names, cur_table, table_list):
     print("selected non-existent line")
 
 
-def delete_line(cmd, table_names, cur_table, table_list):
+def delete_line(cmd, table_names, cur_table, table_list, pair):
     if len(cmd) != 2:
         print("incorrect input")
         return
     ind1 = table_names.index(cur_table)
     ind2 = int(cmd[1])
+    if len(pair) > 1:
+        del pair[1][ind2]
     if ind2 in table_list[ind1]:
         del table_list[ind1][ind2]
         print("line with id:", cmd[1], "deleted")
@@ -88,7 +96,7 @@ def print_line(cmd, table_names, cur_table, table_list, titles):
         print("selected non-existent line")
 
 
-def gen_table(cmd, table_names, table_list, generated_table):
+def gen_table(cmd, table_names, table_list, generated_table, pair):
     if len(cmd) != 3:
         print("incorrect input")
         return
@@ -113,6 +121,9 @@ def gen_table(cmd, table_names, table_list, generated_table):
             j = 0
             generated_table[int(tbl[i][0])] = r_variants[j]
 
+    pair[0].append(ind_stud)
+    pair[0].append(ind_var)
+    pair.append(generated_table)
     print("\ntesting table")
     print("stud_id | var_id")
     print("----------------")
@@ -125,6 +136,10 @@ def gen_table(cmd, table_names, table_list, generated_table):
         print(" ".join(table_list[ind_stud][key]), table_list[ind_var][value][0], "no mark", sep=' | ')
 
 
+def print_gen(generated_table, table_list, pair):
+    print(pair)
+
+
 def add_from_file(table_names, table_list, cur_table, cmd):
     filename = cmd[1]
     ind = table_names.index(cur_table)
@@ -135,4 +150,3 @@ def add_from_file(table_names, table_list, cur_table, cmd):
             table_list[ind][n] = a
             n += 1
     f.close()
-
