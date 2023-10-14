@@ -23,7 +23,7 @@ def add_row(table_names, table_list, cur_table, cmd, pair):
         table_list[ind][len(table_list[ind]) + 1] = cmd[1::]
         r_variants = list(table_list[1].keys())
         random.shuffle(r_variants)
-        pair[1][len(table_list[ind])] = r_variants[0]
+        pair[1][len(table_list[ind])+1] = [r_variants[0], 'no mark']
         return
     table_list[ind][len(table_list[ind]) + 1] = cmd[1::]
 
@@ -115,11 +115,11 @@ def gen_table(cmd, table_names, table_list, generated_table, pair):
     j = 0
     for i in range(t_len):
         if j < len(r_variants):
-            generated_table[int(tbl[i][0])] = r_variants[j]
+            generated_table[int(tbl[i][0])] = [r_variants[j], 'no mark']
             j += 1
         else:
             j = 0
-            generated_table[int(tbl[i][0])] = r_variants[j]
+            generated_table[int(tbl[i][0])] = [r_variants[j], 'no mark']
 
     pair[0].append(ind_stud)
     pair[0].append(ind_var)
@@ -128,16 +128,22 @@ def gen_table(cmd, table_names, table_list, generated_table, pair):
     print("stud_id | var_id")
     print("----------------")
     for key, value in generated_table.items():
-        print("  ", key, "   ", value)
+        print("  ", key, "   ", value[0])
 
     print("\nfull_name | variant | mark")
     print("--------------------------")
     for key, value in generated_table.items():
-        print(" ".join(table_list[ind_stud][key]), table_list[ind_var][value][0], "no mark", sep=' | ')
+        print(" ".join(table_list[ind_stud][key]), table_list[ind_var][value[0]][0], value[1], sep=' | ')
 
 
 def print_gen(generated_table, table_list, pair):
+    print("\nfull_name | variant | mark")
+    print("--------------------------")
+    ind_stud = pair[0][0]
+    ind_var = pair[0][1]
     print(pair)
+    for key, value in pair[1].items():
+        print(" ".join(table_list[ind_stud][key]), table_list[ind_var][int(value[0])][0], value[1], sep=' | ')
 
 
 def add_from_file(table_names, table_list, cur_table, cmd):
