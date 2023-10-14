@@ -28,6 +28,7 @@ while True:
         print("generate table: /gen #students_table #variants_table")
         print("add rows from file: /aff #filename")
         print("print gen table: /pg")
+        print("rate student: /mark #line_id #mark")
         print("exit: /e")
 
     elif cmd[0] == '/nt':
@@ -66,6 +67,9 @@ while True:
 
     elif cmd[0] == '/pg':
         print_gen(generated_table, table_list, pair)
+
+    elif cmd[0] == '/mark':
+        mark(cmd, generated_table, table_list, pair)
 
     elif cmd[0] == '/e' and len(cmd) == 1:
         print("-----EXIT-----")
